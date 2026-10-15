@@ -45,6 +45,7 @@ jobs:
           node --test scripts/test-existing-game-fixes.mjs scripts/test-factory-sandbox.mjs scripts/test-echo-expedition.mjs scripts/test-echo-campaign.mjs scripts/test-echo-compatibility.mjs
           node scripts/sync-game-catalog.mjs --check
           node promo-video/scripts/check-game-tiers.mjs
+          node scripts/check-project-docs.mjs
       - name: Install isolated browser-test runtime
         working-directory: promo-video
         run: |

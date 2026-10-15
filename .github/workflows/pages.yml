@@ -34,10 +34,11 @@ jobs:
           node --test scripts/test-existing-game-fixes.mjs scripts/test-factory-sandbox.mjs scripts/test-echo-expedition.mjs scripts/test-echo-campaign.mjs scripts/test-echo-compatibility.mjs
           node scripts/sync-game-catalog.mjs --check
           node promo-video/scripts/check-game-tiers.mjs
+          node scripts/check-project-docs.mjs
       - name: Prepare static site
         run: |
           mkdir -p _site
-          cp ./*.html README.md GAME_AUDIT.md GAME_TIERS.json RATING_STANDARD.md LICENSE _site/
+          cp ./*.html README.md CHANGELOG.md GAME_AUDIT.md GAME_TIERS.json RATING_STANDARD.md LICENSE _site/
           mkdir -p _site/development
           cp development/echo-expedition.html _site/development/
           cp development/README.md _site/development/

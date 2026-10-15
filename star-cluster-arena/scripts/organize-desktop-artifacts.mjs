@@ -8,6 +8,7 @@ const releaseRoot = resolve(projectRoot, "../star-cluster-arena-desktop");
 const buildRoot = join(releaseRoot, "build");
 const packageJson = JSON.parse(await readFile(join(projectRoot, "package.json"), "utf8"));
 const versionRoot = join(releaseRoot, `v${packageJson.version}`);
+const releaseChannel = packageJson.version.includes("-") ? "预发布" : "正式版";
 
 async function listFiles(root) {
   const found = [];
@@ -52,8 +53,8 @@ const checksums = [
 await writeFile(join(versionRoot, "SHA256SUMS.txt"), `${checksums.join("\r\n")}\r\n`, "utf8");
 await writeFile(join(versionRoot, "README-WINDOWS.txt"), [
   `星团大作战 ${packageJson.version}（Windows x64）`,
-  "1.0.0 发布候选 1（sca-v1.0.0-rc.1）；v4.0 是之前的工程历史版本，不是另一份开发源码。",
-  "候选包尚未完成全部正式验收；本机 4K 全屏未稳定达到 120 FPS，实际异地与干净机器安装仍待测。",
+  `${packageJson.version} ${releaseChannel}（sca-v${packageJson.version}）；v4.0 是之前的工程历史版本，不是另一份开发源码。`,
+  "正式发行不表示所有硬件与平台审核已完成；性能、实际异地和干净机器安装的验证范围见随附 QA 文档。",
   "",
   `安装版：双击“${basename(installerTarget)}”，可在安装向导中选择安装位置、桌面快捷方式和当前用户/所有用户安装。`,
   `便携版：完整解压“${basename(portableTarget)}”，再双击解压目录内的 StarClusterArena.exe。`,
