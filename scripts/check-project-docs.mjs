@@ -30,6 +30,9 @@ assert.ok(readme.includes(stableRelease), 'current stable desktop download is di
 assert.ok(!readme.includes('sca-v1.0.0-rc.1'), 'current root entry does not link to the historical RC');
 assert.ok(readme.includes('回声禁区 · 测试版'), 'the experimental game stays explicitly labeled');
 assert.ok(pages.includes('README.md CHANGELOG.md'), 'Pages publishes the linked changelog');
+const artifactName = 'github-pages-${{ github.run_id }}-${{ github.run_attempt }}';
+assert.equal(pages.split(artifactName).length - 1, 2,
+  'upload and deploy use the same per-attempt artifact, avoiding duplicate names on retries');
 
 const details = [...readme.matchAll(/<\/?details>/g)].map(match => match[0]);
 let depth = 0;
